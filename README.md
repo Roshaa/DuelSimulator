@@ -37,13 +37,13 @@ Game logic is **data-first**, minimizing hardcoding and maximizing extensibility
 
 ## 📁 Project Structure
 
-/Classes -> AbstractClass and concrete implementations (e.g., Warrior, Mage)
-/Abilities -> Ability class (data-driven)
-/Items -> Item class (data-driven)
-/Combat -> Duel logic (orchestration)
-/Interfaces -> Core abstractions
-/UserInputs -> Handles user input
-Program.cs -> App entry point (object composition and simulation start)
+- /Classes -> AbstractClass and concrete implementations (e.g., Warrior, Mage)
+- /Abilities -> Ability class (data-driven)
+- /Items -> Item class (data-driven)
+- /Combat -> Duel logic (orchestration)
+- /Interfaces -> Core abstractions
+- /UserInputs -> Handles user input
+- Program.cs -> App entry point (object composition and simulation start)
 
 
 ---
