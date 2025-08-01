@@ -1,51 +1,72 @@
-# C# OOP & SOLID Principles: A Turn-Based Duel Simulator
+# ⚔️ C# OOP & SOLID Principles: A Turn-Based Duel Simulator
 
-This console application is a hands-on project designed to demonstrate a deep, practical understanding of Object-Oriented Programming (OOP) and the five SOLID design principles. It simulates a turn-based duel between two fantasy characters, where the focus is not on the game itself, but on the quality, maintainability, and extensibility of the underlying code.
+This console application simulates a turn-based duel between two fantasy characters. The main goal is to demonstrate mastery of **Object-Oriented Programming (OOP)** and the **SOLID principles** in C#.
 
-This project serves as a portfolio piece to showcase the ability to write C# code.
+> 🔧 **Purpose:** Showcase clean, maintainable, and extensible code using OOP best practices—not focus on game design.
 
-## Key Design & Architectural Patterns
+---
 
-This project intentionally uses specific design patterns and architectural decisions to create a robust and flexible system.
+## 🧠 Key Design & Architecture
 
-### Data-Driven Design
-A core principle of this project is to define game content as data, not as code. This is a modern approach that allows for rapid content expansion without modifying core application logic.
-*   **Abilities & Items:** Instead of creating a separate class for every ability (`Fireball`, `Ice Barrier`) and item (`Frostmourne`, `The One Ring`), they are defined as instances of a single, concrete `Ability` and `Item` class. This makes the system incredibly extensible—adding 20 new items is as simple as adding 20 new lines to a list, with no new classes required.
-*   **Damage Modifiers:** Class-vs-class advantages (e.g., "Warrior is strong against Assassin") are not hard-coded with `if/else` statements. Instead, each class defines its own weaknesses and resistances in a `DamageModifiers` dictionary. This logic is applied generically by the central combat engine.
+### ✅ Data-Driven Design
 
-### SOLID Principles in Action
+Game logic is **data-first**, minimizing hardcoding and maximizing extensibility:
 
-*   **[S] Single Responsibility Principle:** Each class has a single, well-defined purpose. The `Duel` class manages the combat flow, `AbstractClass` and its children manage their own state, and the `InputHandler` manages user interaction.
-*   **[O] Open/Closed Principle:** The system is open for extension but closed for modification. You can add a new `Paladin` class, 50 new abilities, or 100 new items without changing any of the existing, tested code in the core combat or character classes.
-*   **[L] Liskov Substitution Principle:** All character classes inherit from `AbstractClass`. The `Duel` engine can work with any two `AbstractClass` objects, treating them identically without needing to know their concrete types (`Warrior`, `Mage`, etc.).
-*   **[I] Interface Segregation Principle:** Interfaces are kept small and focused (e.g., `IClassInterface`).
-*   **[D] Dependency Inversion Principle:** High-level modules like `Duel` depend on abstractions (`AbstractClass`), not on low-level concrete classes (`Warrior`). This decouples the system and allows for greater flexibility.
+- **Abilities & Items:** All abilities and items are defined as *data instances* (not unique classes). Add 100+ items/abilities with no code changes.
+- **Damage Modifiers:** Class advantages are defined in a `DamageModifiers` dictionary. No `if/else` or switch spaghetti.
 
-## Tech Stack
+### 🧱 SOLID Principles in Action
 
-*   **Language:** C#
-*   **Framework:** .NET
-*   **Platform:** Console Application
+| Principle | Implementation |
+|----------|----------------|
+| **S**ingle Responsibility | Each class has one job (e.g., `Duel`, `InputHandler`, `Character`). |
+| **O**pen/Closed           | Add new classes/items/abilities without modifying existing logic. |
+| **L**iskov Substitution   | `Duel` interacts only with `AbstractClass`, not specific subclasses. |
+| **I**nterface Segregation| Interfaces are small and focused (e.g., `IClassInterface`). |
+| **D**ependency Inversion | Core logic (`Duel`) depends on abstractions, not implementations. |
 
-## Code Structure Overview
+---
 
-*   **/Classes:** Contains the `AbstractClass` base class and concrete implementations like `Warrior`, `Mage`, and `Assassin`.
-*   **/Abilities:** Contains the data-driven `Ability` class.
-*   **/Items:** Contains the data-driven `Item` class.
-*   **/Combat:** Contains the `Duel` class, which orchestrates the entire simulation.
-*   **/Interfaces:** Contains the core abstractions for the project.
-*   **/UserInputs:** Contains the `InputHandler` responsible for all console interaction.
-*   **Program.cs:** The application's entry point, responsible for composing the objects and starting the simulation.
+## 🛠️ Tech Stack
+
+- **Language:** C#
+- **Framework:** .NET (6.0+)
+- **Platform:** Console Application
+
+---
+
+## 📁 Project Structure
+
+/Classes -> AbstractClass and concrete implementations (e.g., Warrior, Mage)
+/Abilities -> Ability class (data-driven)
+/Items -> Item class (data-driven)
+/Combat -> Duel logic (orchestration)
+/Interfaces -> Core abstractions
+/UserInputs -> Handles user input
+Program.cs -> App entry point (object composition and simulation start)
 
 
+---
 
+## 🚀 How to Run
 
+```bash
+# 1. Clone the repo
+git clone https://github.com/<your-github-username>/DuelSimulator.git
 
+# 2. Navigate into the project
+cd DuelSimulator
 
-Example Console Output:
+# 3. Run the application
+dotnet run
+
+Or open in your IDE and run
+
+Example Output:
+
 
 Welcome to my duel simulator!
-You will be given random choices to constructs 2 classes, then the classes will duel.
+You will be given random choices to construct 2 classes, then the classes will duel.
 Enter your player name: Player1
 Choose your class:
 1. Warrior
@@ -85,7 +106,6 @@ Player1 equipped: Glamdring, the Foe-hammer!
 Player1 equipped: Warglaives of Azzinoth!
 Player1 equipped: Infinity Edge!
 
-
 --- Class 1 Info ---
 Class: Ranger
 Player Name: A
@@ -107,56 +127,44 @@ Health Regen: 150
 Mana Regen: 65
 Attack Value: 1050
 Ability Power: 400
+
 Type 'start' to begin the duel: start
 ========================================
 DUEL START!
 Random roll: 2 (A starts first)
 ========================================
 
-
-
-
 --- Turn 1 ---
-------------------------------------------------------------------------------------
 A (Ranger) attacks B (Ranger)!
-------------Class Attacking---------------
 A casts Fireball (Mana Cost: 100, Cooldown: 3 turns)!
   Value from spell: 1000
   A's remaining mana: 500
   Attack Value: 2510
-------------Class Defending---------------
-  Defense Value: 105
-------------Turn Result---------------
-  It's not very effective... The attack is reduced by 0.5x.
-  A deals 1202 damage!
-  B's remaining health: 4498
-------------------------------------------------------------------------------------
+Defense Value: 105
+Not very effective... Attack is reduced by 0.5x.
+A deals 1202 damage!
+B's remaining health: 4498
+
 B (Ranger) attacks A (Ranger)!
-------------Class Attacking---------------
 B casts Pyroblast (Mana Cost: 750, Cooldown: 8 turns)!
   Value from spell: 1200
   B's remaining mana: 350
   Attack Value: 2408
-------------Class Defending---------------
-  Defense Value: 180
-------------Turn Result---------------
-  It's not very effective... The attack is reduced by 0.5x.
-  B deals 1114 damage!
-  A's remaining health: 2786
-------------------------------------------------------------------------------------
-A regenerates 25 health (from 2786 to 2811/3900).
-A regenerates 40 mana (from 500 to 540/600).
-------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------
+Defense Value: 180
+Not very effective... Attack is reduced by 0.5x.
+B deals 1114 damage!
+A's remaining health: 2786
+
+A regenerates 25 health (2786 → 2811)
+A regenerates 40 mana (500 → 540)
+
 B casts Healing Light (Mana Cost: 350, Cooldown: 7 turns)!
   Value from spell: 1000
   B's remaining mana: 0
-B regenerates 1150 health (from 4498 to 5648/5700).
-B regenerates 65 mana (from 0 to 65/1100).
-------------------------------------------------------------------------------------
+B heals 1150 health (4498 → 5648)
+B regenerates 65 mana (0 → 65)
 
 --- Turn 2 ---
-
 ...
 
 *** Player1 wins the duel! ***
