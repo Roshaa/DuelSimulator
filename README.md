@@ -50,7 +50,7 @@ Program.cs -> App entry point (object composition and simulation start)
 
 ## 🚀 How to Run
 
-```bash
+
 # 1. Clone the repo
 git clone https://github.com/<your-github-username>/DuelSimulator.git
 
@@ -62,9 +62,12 @@ dotnet run
 
 Or open in your IDE and run
 
-Example Output:
+---
 
+## Example Output:
+---
 
+```bash
 Welcome to my duel simulator!
 You will be given random choices to construct 2 classes, then the classes will duel.
 Enter your player name: Player1
